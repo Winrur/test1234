@@ -10,9 +10,10 @@
         // wraps up the renderer, scene, and animation loop
         var sim = new altspace.utilities.Simulation();
         var xhr = new XMLHttpRequest();
+        var boxTex;
         var scene = sim.scene;
         scene.addEventListener('avatarstatus', function(event) {
-        var boxTex = new THREE.TextureLoader().load("dummyimage.com/600x400/000/fff.jpg&text=" + event.detail.displayName);
+        boxTex = new THREE.TextureLoader().load("dummyimage.com/600x400/000/fff.jpg&text=" + event.detail.displayName);
         console.log(event.detail.displayName);
         });
         // create a green cube 200 pixels in size
