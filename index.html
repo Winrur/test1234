@@ -14,6 +14,7 @@
         var scene = sim.scene;
         scene.addEventListener('avatarstatus', function(event) {
         boxTex = new THREE.TextureLoader().load("dummyimage.com/600x400/000/fff.jpg&text=" + event.detail.displayName);
+        console.log(boxTex);
         console.log(event.detail.displayName);
         });
         // create a green cube 200 pixels in size
