@@ -10,8 +10,10 @@
         // wraps up the renderer, scene, and animation loop
         var sim = new altspace.utilities.Simulation();
         var xhr = new XMLHttpRequest();
-
-        var boxTex = new THREE.TextureLoader().load("dummyimage.com/600x400/000/fff.jpg&text=" + event.detail.userId);
+        scene.addEventListener('avatarstatus', function(event) {
+        var boxTex = new THREE.TextureLoader().load("dummyimage.com/600x400/000/fff.jpg&text=" + event.detail.displayName);
+        console.log(event.detail.displayName);
+        }
         // create a green cube 200 pixels in size
         var cube = new THREE.Mesh(
             new THREE.BoxGeometry(200, 200, 200),
@@ -21,7 +23,8 @@
 
         // attach a spin behavior to make it rotate over time
         cube.addBehavior( new altspace.utilities.behaviors.Spin() );
-        console.log(event.detail.userId);
+       
+
         repeatRequest();
         </script>
     </body>
