@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang=en>
+    <head>
+        <script src="https://cdn.rawgit.com/mrdoob/three.js/r84/build/three.js"></script>
+        <script src="https://sdk.altvr.com/libs/altspace.js/2.7.3/altspace.min.js"></script>
+    </head>
+    <body>
+        <script>
+        // wraps up the renderer, scene, and animation loop
+        var sim = new altspace.utilities.Simulation();
+        var xhr = new XMLHttpRequest();
+        var parser = new DOMParser();
+        var finalXml;
+        var xmlDoc;
+        var xmlObj;
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == XMLHttpRequest.DONE) {
+        }
+    }
+        function repeatRequest() {
+            xhr.open("GET", "https://thecatapi.com/api/images/get?format=xml&results_per_page=1", false);
+            xhr.send();
+            xmlObj = xhr.responseText;
+            xmlDoc = parser.parseFromString(xmlObj, "text/xml");
+            finalXml = xmlDoc.getElementsByTagName("url")[0].childNodes[0].nodeValue;
+            console.log(finalXml);
+            
+        }
+
+        var boxTex = new THREE.TextureLoader().load(finalXml);
+        // create a green cube 200 pixels in size
+        var cube = new THREE.Mesh(
+            new THREE.BoxGeometry(200, 200, 200),
+            new THREE.MeshBasicMaterial({map: boxTex})
+        );
+        sim.scene.add(cube);
+
+        // attach a spin behavior to make it rotate over time
+        cube.addBehavior( new altspace.utilities.behaviors.Spin() );
+        repeatRequest();
+        </script>
+    </body>
+</html>
