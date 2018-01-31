@@ -2,31 +2,28 @@
 <html lang=en>
     <head>
         <script src="https://cdn.rawgit.com/mrdoob/three.js/r84/build/three.js"></script>
-        <script src="https://cdn.rawgit.com/AltspaceVR/AltspaceSDK/v2.7.1/dist/altspace.min.js"></script>
-        <script src="https://cdn.rawgit.com/NGenesis/altspacevr-behaviors/v0.9.2/js/altspaceutil.min.js"></script>
+        <script src="https://sdk.altvr.com/libs/altspace.js/2.7.3/altspace.min.js"></script>
+        <script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
     </head>
     <body>
         <script>
-        // wraps up the renderer, scene, and animation loop
-        var sim = new altspace.utilities.Simulation();
-        var xhr = new XMLHttpRequest();
-        var boxTex;
-        var scene = sim.scene;
-        scene.addEventListener('avatarchange', function(event) {
-        boxTex = new THREE.TextureLoader().load("dummyimage.com/600x400/000/fff.jpg&text=" + event.detail.displayName);
-        console.log(boxTex);
-        console.log(event.detail.displayName);
-        });
-        // create a green cube 200 pixels in size
-        var cube = new THREE.Mesh(
-            new THREE.BoxGeometry(200, 200, 200),
-            new THREE.MeshBasicMaterial({map: boxTex})
-        );
-        sim.scene.add(cube);
+          //Warns the user if the app isn't launched in Altspace
+        	if(!altspace.inClient) {
+       		document.write("You have to open this page in Altspace!");
+        	}
+          // wraps up the renderer, scene, and animation loop
+          var sim = new altspace.utilities.Simulation();
 
-        // attach a spin behavior to make it rotate over time
-        cube.addBehavior( new altspace.utilities.behaviors.Spin() );
-       
+           // create a green cube 200 pixels in size
+           var cube = new THREE.Mesh(
+               new THREE.BoxGeometry(200, 200, 200),
+               new THREE.MeshBasicMaterial({color: 0x00ff00})
+           );
+           sim.scene.add(cube);
+
+           // attach a spin behavior to make it rotate over time
+           cube.addBehavior( new altspace.utilities.behaviors.Bob() );
         </script>
     </body>
 </html>
