@@ -12,7 +12,7 @@
         var xhr = new XMLHttpRequest();
         var boxTex;
         var scene = sim.scene;
-        scene.addEventListener('avatarstatus', function(event) {
+        scene.addEventListener('avatarchange', function(event) {
         boxTex = new THREE.TextureLoader().load("dummyimage.com/600x400/000/fff.jpg&text=" + event.detail.displayName);
         console.log(boxTex);
         console.log(event.detail.displayName);
@@ -27,8 +27,6 @@
         // attach a spin behavior to make it rotate over time
         cube.addBehavior( new altspace.utilities.behaviors.Spin() );
        
-
-        repeatRequest();
         </script>
     </body>
 </html>
