@@ -15,12 +15,14 @@
           // wraps up the renderer, scene, and animation loop
           var sim = new altspace.utilities.Simulation();
 
+          var scene = sim.scene;
+
            // create a green cube 200 pixels in size
            var cube = new THREE.Mesh(
                new THREE.BoxGeometry(200, 200, 200),
                new THREE.MeshBasicMaterial({color: 0x00ff00})
            );
-           sim.scene.add(cube);
+           scene.add(cube);
 
            // attach a spin behavior to make it rotate over time
            cube.addBehavior( new altspace.utilities.behaviors.Bob() );
